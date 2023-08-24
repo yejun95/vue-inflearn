@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader/>
-    <TodoInput v-on:addTodoItem="addOneItem"/>
-    <TodoList :propsdata="todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"/>
+    <TodoInput/>
+    <TodoList :propsdata="todoItems" v-on:toggleItem="toggleOneItem"/>
     <TodoFooter v-on:clearAll="clearAllItems"/>
       
   </div>
@@ -21,15 +21,16 @@ export default {
     }
   },
   methods: {
-    addOneItem: function(todoItem) {
-      let obj = {completed: false, item: todoItem};
-      localStorage.setItem(todoItem ,JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
-    removeOneItem: function(todoItem, index) {
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
+    // == mutations
+    // addOneItem: function(todoItem) {
+    //   let obj = {completed: false, item: todoItem};
+    //   localStorage.setItem(todoItem ,JSON.stringify(obj));
+    //   this.todoItems.push(obj);
+    // },
+    // removeOneItem: function(todoItem, index) {
+    //   localStorage.removeItem(todoItem.item);
+    //   this.todoItems.splice(index, 1);
+    // },
     toggleOneItem: function(todoItem, index) {
       this.todoItems[index].completed = !this.todoItems[index].completed;
       // 로컬 스토리지의 데이터를 갱신
@@ -41,15 +42,7 @@ export default {
       this.todoItems = [];
     }
   },
-  created: function() {
-        if(localStorage.length > 0) {
-            for (var i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-                }
-            }
-        }
-    },
+  
   components: {
     TodoHeader,
     TodoInput,
