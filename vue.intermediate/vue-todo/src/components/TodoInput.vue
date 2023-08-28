@@ -15,6 +15,8 @@
 </template>
 <script>
 import CommonModal from './common/CommonModal.vue'
+// import { mapMutations } from 'vuex';
+
 export default {
   data: function () {
     return {
@@ -31,6 +33,9 @@ export default {
         this.showModal = !this.showModal;
       }
     },
+    // ...mapMutations({
+    //   addTodo: 'addOneItem'
+    // }),
     clearInput: function () {
       this.newTodoItem = ''
     },
